@@ -12,3 +12,5 @@
     - `wget -T5 -O- http://db1.project-plato.svc.cluster.local:6379` -> should answer
     - `wget -T5 -O- http://db2.project-plato.svc.cluster.local:5432` -> should answer
     - `wget -T5 -O- http://httpforever.com/` -> should give a timeout
+- Point 7: "Confirm the availability of the Secret contents in the Deployment"
+  - Exec into the db2 pod and run the following command: `env | grep ADMIN`

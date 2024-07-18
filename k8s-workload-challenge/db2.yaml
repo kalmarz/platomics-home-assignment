@@ -22,6 +22,17 @@ spec:
         ports:
         - name: container-port
           containerPort: 80
+        env:
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: admin-credentials
+              key: username
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: admin-credentials
+              key: password
       restartPolicy: Always
 ---
 apiVersion: v1
