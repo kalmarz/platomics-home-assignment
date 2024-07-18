@@ -34,6 +34,26 @@ spec:
           capabilities:
             drop:
             - all
+        livenessProbe:
+          exec:
+            command: 
+            - /bin/true
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - wget -T2 -O- http://db1.project-plato.svc.cluster.local:6379
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
         volumeMounts:
         - mountPath: /tmp
           name: tmp
