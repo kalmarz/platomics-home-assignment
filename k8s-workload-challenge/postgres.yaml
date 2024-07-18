@@ -4,7 +4,7 @@ metadata:
   name: bitnami
   namespace: flux-system
 spec:
-  interval: 3600m
+  interval: 60m
   url: https://charts.bitnami.com/bitnami
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -13,7 +13,7 @@ metadata:
   name: postgresql
   namespace: project-plato
 spec:
-  interval: 30s
+  interval: 60m
   chart:
     spec:
       # https://github.com/bitnami/charts/tree/master/bitnami/postgresql
@@ -24,5 +24,6 @@ spec:
         namespace: flux-system
       interval: 60m
   values:
+    nameOverride: "postgresql"
     metrics:
       enabled: true

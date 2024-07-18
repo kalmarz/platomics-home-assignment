@@ -17,3 +17,6 @@
 - Bonus: Postgres
   - The manifest assumes FluxCD running on the cluster and picking up the changes from the Git repository and reconciling them.
   - The `HelmRelease` manifest runs with the default values, it only enables the Prometheus exporter as an extra.
+- Bonus: kube-prometheus-stack
+  - The manifest assumes FluxCD running on the cluster and picking up the changes from the Git repository and reconciling them.
+  - The `HelmRelease` manifest runs with the default values, it only adds a scrape config for Postgres.

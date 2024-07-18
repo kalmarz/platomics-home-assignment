@@ -1,0 +1,32 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: kube-prometheus-stack
+  namespace: flux-system
+spec:
+  interval: 60m
+  url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 60m
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+      sourceRef:
+        kind: HelmRepository
+        name: kube-prometheus-stack
+        namespace: flux-system
+      interval: 60m
+  values:
+    prometheus:
+      prometheusSpec:
+        additionalScrapeConfigs:
+          - job_name: "postgres"
+            static_configs:
+            - targets: ["postgresql.project-plato.svc.cluster.local:9187"]
