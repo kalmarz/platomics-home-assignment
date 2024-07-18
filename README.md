@@ -14,3 +14,6 @@
     - `wget -T5 -O- http://httpforever.com/` -> should give a timeout
 - Point 7: "Confirm the availability of the Secret contents in the Deployment"
   - Exec into the db2 pod and run the following command: `env | grep ADMIN`
+- Bonus: Postgres
+  - The manifest assumes FluxCD running on the cluster and picking up the changes from the Git repository and reconciling them.
+  - The `HelmRelease` manifest runs with the default values, it only enables the Prometheus exporter as an extra.
