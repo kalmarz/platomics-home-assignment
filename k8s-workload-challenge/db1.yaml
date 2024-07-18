@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db1
+  namespace: project-plato
+  labels:
+    app: db1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db1
+  template:
+    metadata:
+      labels:
+        app: db1
+    spec:
+      containers:
+      - image: nginx:1.16.1-alpine
+        imagePullPolicy: IfNotPresent
+        name: db1
+        ports:
+        - name: container-port
+          containerPort: 80
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db1
+  namespace: project-plato
+spec:
+  type: ClusterIP
+  selector:
+    app: db1
+  ports:
+  - port: 6379
+    targetPort: container-port
